@@ -12,6 +12,7 @@ upstream_package_name: dfuzzer
 downstream_package_name: dfuzzer
 upstream_project_url: https://github.com/dbus-fuzzer/dfuzzer
 upstream_tag_template: "v{version}"
+csmock_args: --cppcheck-add-flag=--enable=style -t clang
 
 actions:
   post-upstream-clone:
@@ -27,9 +28,19 @@ jobs:
   trigger: pull_request
   metadata:
     targets:
-    - fedora-stable-aarch64
-    - fedora-stable-armhfp
-    - fedora-stable-i386
-    - fedora-stable-ppc64le
-    - fedora-stable-s390x
-    - fedora-stable-x86_64
+    - fedora-all-aarch64
+    - fedora-all-armhfp
+    - fedora-all-i386
+    - fedora-all-ppc64le
+    - fedora-all-s390x
+    - fedora-all-x86_64
+- job: copr_build
+  trigger: commit
+  metadata:
+    targets:
+    - fedora-all-aarch64
+    - fedora-all-armhfp
+    - fedora-all-i386
+    - fedora-all-ppc64le
+    - fedora-all-s390x
+    - fedora-all-x86_64
